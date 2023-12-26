@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            user-select: none;
+        }
+    </style>
+    <title>Snowfall</title>
+</head>
+<body>
+    <script>
+        // 创建雪花
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❅';
+            snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
+            snowflake.style.top = '-50px';
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(snowflake);
+
+            // 雪花飘落动画
+            let animation = snowflake.animate([
+                { top: '-50px' },
+                { top: window.innerHeight + 'px' }
+            ], {
+                duration: Math.random() * 5000 + 3000, // 随机速度
+                iterations: Infinity // 无限循环
+            });
+
+            // 移除雪花
+            animation.onfinish = () => {
+                snowflake.remove();
+            };
+        }
+
+        // 创建多个雪花
+        function createSnowflakes(quantity) {
+            for (let i = 0; i < quantity; i++) {
+                setTimeout(createSnowflake, Math.random() * 3000); // 随机时间间隔生成雪花
+            }
+        }
+
+        // 调用创建雪花函数
+        createSnowflakes(100); // 生成100片雪花
+    </script>
+</body>
+</html>
